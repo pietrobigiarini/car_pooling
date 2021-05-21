@@ -30,12 +30,16 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $user->setRoles(
+                array("ROLE_USER")
+            );
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -43,12 +47,13 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/home", name="app_home")
-     */
 
-    public function findById()
+
+    /**
+     * @Route("/login", name="app_login")
+     */
+    public function loginForm()
     {
-        return $this->render('main/index.html.twig');
+        return $this->render('security/login.html.twig');
     }
 }
