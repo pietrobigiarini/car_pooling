@@ -28,17 +28,17 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180)
      */
-    private $nome;
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=180)
      */
-    private $cognome;
+    private $surname;
 
     /**
      * @ORM\Column(type="string", length=180)
      */
-    private $telefono;
+    private $phone;
 
     /**
      * @ORM\Column(type="json")
@@ -68,38 +68,38 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getNome(): ?string
+    public function getName(): ?string
     {
-        return $this->nome;
+        return $this->name;
     }
 
-    public function setNome(string $nome): self
+    public function setName(string $name): self
     {
-        $this->nome = $nome;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getCognome(): ?string
+    public function getSurname(): ?string
     {
-        return $this->cognome;
+        return $this->surname;
     }
 
-    public function setCognome(string $cognome): self
+    public function setSurname(string $surname): self
     {
-        $this->cognome = $cognome;
+        $this->surname = $surname;
 
         return $this;
     }
 
-    public function getTelefono(): ?string
+    public function getPhone(): ?string
     {
-        return $this->telefono;
+        return $this->phone;
     }
 
-    public function setTelefono(string $telefono): self
+    public function setPhone(string $phone): self
     {
-        $this->telefono = $telefono;
+        $this->phone = $phone;
 
         return $this;
     }
