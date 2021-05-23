@@ -1,65 +1,61 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	Register
-{% endblock %}
-
-{% block css %}
-	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+	Car sharing - Register
 {% endblock %}
 
 {% block body %}
-	{% for flashError in app.flashes('verify_email_error') %}
-		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
-	{% endfor %}
-
 	<div class="container row row-cols-1 justify-content-center m-auto">
-		<div class="row row-cols-1 col" style="width: 40%;">
-			<div class="col mb-3">
-				<h1>Register</h1>
-			</div>
-			{{ form_start(registration) }}
-			{% if not registration.vars.valid %}
-				{% for error in registrationErrors %}
-					<div class="col mb-3 alert alert-danger row gx-2 align-items-center p-2">
-						<div class="col-auto">
-							<span class="badge bg-danger">Error</span>
+		{% for flashError in app.flashes('verify_email_error') %}
+			<div class="alert alert-danger mb-2" role="alert">{{ flashError }}</div>
+		{% endfor %}
+		<div class="card p-4 shadow col custom-bg zoom" style="width: 40%">
+			<div class="row row-cols-1">
+				<div class="col mb-3 text-center">
+					<h1>Register</h1>
+				</div>
+				{{ form_start(registration) }}
+				{% if not registration.vars.valid %}
+					{% for error in registrationErrors %}
+						<div class="col mb-3 alert alert-danger row gx-2 align-items-center p-2">
+							<div class="col-auto">
+								<span class="badge bg-danger">Error</span>
+							</div>
+							<div class="col">
+								<span class="invalid-feedback d-block">{{ error.message }}</span>
+							</div>
 						</div>
-						<div class="col">
-							<span class="invalid-feedback d-block">{{ error.message }}</span>
-						</div>
-					</div>
-				{% endfor %}
-			{% endif %}
-			<div class="col mb-3">
-				{{ form_label(registration.email, 'Email') }}
-				{{ form_widget(registration.email, {'attr': {'class': 'form-control'}}) }}
+					{% endfor %}
+				{% endif %}
+				<div class="col mb-3">
+					{{ form_label(registration.email, 'Email') }}
+					{{ form_widget(registration.email, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="col mb-3">
+					{{ form_label(registration.name, 'Name') }}
+					{{ form_widget(registration.name, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="col mb-3">
+					{{ form_label(registration.surname, 'Surname') }}
+					{{ form_widget(registration.surname, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="col mb-3">
+					{{ form_label(registration.phone, 'Phone') }}
+					{{ form_widget(registration.phone, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="col mb-3">
+					{{ form_label(registration.password, 'Password') }}
+					{{ form_widget(registration.password, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="col mb-3">
+					{{ form_widget(registration.terms, {'attr': {'class': 'form-check-input'}}) }}
+					{{ form_label(registration.terms, 'Accept our terms') }}
+				</div>
+				<div class="col">
+					{{ form_widget(registration.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+				</div>
+				{{ form_end(registration) }}
 			</div>
-			<div class="col mb-3">
-				{{ form_label(registration.name, 'Name') }}
-				{{ form_widget(registration.name, {'attr': {'class': 'form-control'}}) }}
-			</div>
-			<div class="col mb-3">
-				{{ form_label(registration.surname, 'Surname') }}
-				{{ form_widget(registration.surname, {'attr': {'class': 'form-control'}}) }}
-			</div>
-			<div class="col mb-3">
-				{{ form_label(registration.phone, 'Phone') }}
-				{{ form_widget(registration.phone, {'attr': {'class': 'form-control'}}) }}
-			</div>
-			<div class="col mb-3">
-				{{ form_label(registration.password, 'Password') }}
-				{{ form_widget(registration.password, {'attr': {'class': 'form-control'}}) }}
-			</div>
-			<div class="col mb-3">
-				{{ form_widget(registration.terms, {'attr': {'class': 'form-check-input'}}) }}
-				{{ form_label(registration.terms, 'Accept our terms') }}
-			</div>
-			<div class="col mb-3">
-				{{ form_widget(registration.submit, {'attr': {'class': 'btn btn-primary'}}) }}
-			</div>
-			{{ form_end(registration) }}
 		</div>
 	</div>
 {% endblock %}
