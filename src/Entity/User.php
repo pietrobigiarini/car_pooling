@@ -51,6 +51,16 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Driver::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $driver;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Passenger::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $passenger;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -166,5 +176,39 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getDriver(): ?Driver
+    {
+        return $this->driver;
+    }
+
+    public function setDriver(Driver $driver): self
+    {
+        // set the owning side of the relation if necessary
+        if ($driver->getUser() !== $this) {
+            $driver->setUser($this);
+        }
+
+        $this->driver = $driver;
+
+        return $this;
+    }
+
+    public function getPassenger(): ?Passenger
+    {
+        return $this->passenger;
+    }
+
+    public function setPassenger(Passenger $passenger): self
+    {
+        // set the owning side of the relation if necessary
+        if ($passenger->getUser() !== $this) {
+            $passenger->setUser($this);
+        }
+
+        $this->passenger = $passenger;
+
+        return $this;
     }
 }
