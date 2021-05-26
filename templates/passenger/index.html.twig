@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Passenger
+{% endblock %}
+
+{% block body %}
+	<div class="container row justify-content-center mx-auto mt-3">
+		<div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+			<div class="col-md-6 px-0">
+				<h1 class="display-4 fst-italic">Pagina riservata al passeggero</h1>
+				<p class="lead my-3">Qui puoi modificare le impostazioni del profilo del passeggero e prenotare un viaggio</p>
+				<p class="mb-3">
+					<a href="{{ path('app_booking') }}">Prenota il viaggio</a>
+				</p>
+			</div>
+		</div>
+	</div>
+{% endblock %}
