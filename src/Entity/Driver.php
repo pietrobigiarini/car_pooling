@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\DriverRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * @ORM\Entity(repositoryClass=DriverRepository::class)
@@ -49,9 +52,15 @@ class Driver
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Car::class, inversedBy="driver")
+     * @ORM\OneToMany(targetEntity=Car::class, mappedBy="driver")
      */
-    private $car;
+    private $cars;
+
+    public function __construct()
+    {
+        $this->cars = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -130,14 +139,32 @@ class Driver
         return $this;
     }
 
-    public function getCar(): ?Car
+    /**
+     * @return Collection|Car[]
+     */
+    public function getCars(): Collection
     {
-        return $this->car;
+        return $this->cars;
     }
 
-    public function setCar(?Car $car): self
+    public function addCar(Car $car): self
     {
-        $this->car = $car;
+        if (!$this->cars->contains($car)) {
+            $this->cars[] = $car;
+            $car->setDriver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCar(Car $car): self
+    {
+        if ($this->cars->removeElement($car)) {
+            // set the owning side to null (unless already changed)
+            if ($car->getDriver() === $this) {
+                $car->setDriver(null);
+            }
+        }
 
         return $this;
     }

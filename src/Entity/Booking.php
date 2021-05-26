@@ -10,19 +10,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Booking
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity=Trip::class, inversedBy="bookings")
      */
     private $traver;
 
     /**
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity=Passenger::class, inversedBy="bookings")
      */
     private $passenger;

@@ -6,6 +6,7 @@ use App\Repository\TripRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * @ORM\Entity(repositoryClass=TripRepository::class)
@@ -60,14 +61,15 @@ class Trip
     private $stop;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $car;
-
-    /**
      * @ORM\OneToMany(targetEntity=Booking::class, mappedBy="traver")
      */
     private $bookings;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Car::class, inversedBy="trips")
+     * @JoinColumn(name="car", referencedColumnName="plate")
+     */
+    private $car;
 
     public function __construct()
     {
@@ -175,18 +177,6 @@ class Trip
         return $this;
     }
 
-    public function getCar(): ?int
-    {
-        return $this->car;
-    }
-
-    public function setCar(int $car): self
-    {
-        $this->car = $car;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Booking[]
      */
@@ -213,6 +203,18 @@ class Trip
                 $booking->setTraver(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCar(): ?Car
+    {
+        return $this->car;
+    }
+
+    public function setCar(?Car $car): self
+    {
+        $this->car = $car;
 
         return $this;
     }

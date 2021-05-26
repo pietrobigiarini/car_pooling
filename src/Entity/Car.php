@@ -6,6 +6,8 @@ use App\Repository\CarRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+
 
 /**
  * @ORM\Entity(repositoryClass=CarRepository::class)
@@ -14,8 +16,7 @@ class Car
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=7)
      */
     private $plate;
 
@@ -30,13 +31,20 @@ class Car
     private $model;
 
     /**
-     * @ORM\OneToMany(targetEntity=Driver::class, mappedBy="car")
+     * @ORM\OneToMany(targetEntity=Trip::class, mappedBy="car")
+     */
+    private $trips;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Driver::class, inversedBy="cars")
+     * @JoinColumn(name="driver", referencedColumnName="id")
      */
     private $driver;
 
+
     public function __construct()
     {
-        $this->driver = new ArrayCollection();
+        $this->trips = new ArrayCollection();
     }
 
     public function getPlate(): ?int
@@ -69,31 +77,43 @@ class Car
     }
 
     /**
-     * @return Collection|Driver[]
+     * @return Collection|Trip[]
      */
-    public function getDriver(): Collection
+    public function getTrips(): Collection
     {
-        return $this->driver;
+        return $this->trips;
     }
 
-    public function addDriver(Driver $driver): self
+    public function addTrip(Trip $trip): self
     {
-        if (!$this->driver->contains($driver)) {
-            $this->driver[] = $driver;
-            $driver->setCar($this);
+        if (!$this->trips->contains($trip)) {
+            $this->trips[] = $trip;
+            $trip->setCar($this);
         }
 
         return $this;
     }
 
-    public function removeDriver(Driver $driver): self
+    public function removeTrip(Trip $trip): self
     {
-        if ($this->driver->removeElement($driver)) {
+        if ($this->trips->removeElement($trip)) {
             // set the owning side to null (unless already changed)
-            if ($driver->getCar() === $this) {
-                $driver->setCar(null);
+            if ($trip->getCar() === $this) {
+                $trip->setCar(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDriver(): ?Driver
+    {
+        return $this->driver;
+    }
+
+    public function setDriver(?Driver $driver): self
+    {
+        $this->driver = $driver;
 
         return $this;
     }
