@@ -38,7 +38,12 @@ class RegistrationFormType extends AbstractType
             ->add('phone', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Enter your phone number',
-                ]
+               
+            ], 'constraints' => new Length([
+                    'min' => 10,
+                    'minMessage' => 'Your password should be at least {{ limit }} characters',
+                    'max' => 10,
+                ]),
             ])
             ->add('password', PasswordType::class, [
                 'attr' => [

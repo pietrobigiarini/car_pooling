@@ -36,7 +36,7 @@ class Trip
     private $departureDate;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $baggage;
 
@@ -46,7 +46,7 @@ class Trip
     private $contribution;
 
     /**
-     * @ORM\Column(type="dateinterval")
+     * @ORM\Column(type="integer")
      */
     private $travelTime;
 
@@ -141,12 +141,12 @@ class Trip
         return $this;
     }
 
-    public function getTravelTime(): ?\DateInterval
+    public function getTravelTime(): ?int
     {
         return $this->travelTime;
     }
 
-    public function setTravelTime(\DateInterval $travelTime): self
+    public function setTravelTime(int $travelTime): self
     {
         $this->travelTime = $travelTime;
 

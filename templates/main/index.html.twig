@@ -5,9 +5,9 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container row row-cols-1 justify-content-center m-auto">
-		<div class="card p-4 shadow custom-bg zoom" style="width: 40%;">
-			<div class="row row-cols-1 col">
+	<div class="container d-flex m-auto justify-content-between">
+		<div class="card p-4 shadow custom-bg me-5" style="width: 40%;">
+			<div class="row row-cols-1">
 				<div class="col mb-3 text-center">
 					<div class="card bg-dark text-white">
 						<img src="images/logo.png" class="card-img" alt="...">
@@ -18,6 +18,45 @@
 					<p>Sito per pubblicare e prenotare viaggi</p>
 				</div>
 			</div>
+		</div>
+		<div class="card p-4 shadow custom-bg">
+			<table class="table table-borderless align-middle text-white h-100 rounded">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Partenza</th>
+						<th scope="col">Arrivo</th>
+						<th scope="col">Data</th>
+						<th scope="col">Costo</th>
+						<th scope="col">Durata</th>
+						<th scope="col">Animali (si/no)</th>
+						<th scope="col">Soste (si/no)</th>
+						<th scope="col">Bagaglio (si/no)</th>
+						<th scope="col">Targ</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for trip in trips %}
+						<tr>
+							<th scope="row">{{ trip.id }}</th>
+							<td>{{ trip.departureCity }}</td>
+							<td>{{ trip.destinationCity }}</td>
+							<td>{{ trip.departureDate|date('d/m/Y') }}</td>
+							<td>&euro;{{ trip.contribution }}</td>
+							<td>{{ trip.travelTime }} min</td>
+							<td>{{ trip.animal ? 'Sì' : 'No' }}</td>
+							<td>{{ trip.stop ? 'Sì' : 'No' }}</td>
+							<td>{{ trip.baggage ? 'Sì' : 'No' }}</td>
+							<td>{{ trip.car }}</td>
+							{% if app.user %}
+								<td>
+									<a class="btn btn-info" href="{{ path('app_booking', { 'id': trip.id }) }}">Prenota</a>
+								</td>
+							{% endif %}
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
 		</div>
 	</div>
 {% endblock %}

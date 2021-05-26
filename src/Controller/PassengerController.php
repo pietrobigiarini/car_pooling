@@ -13,18 +13,14 @@ class PassengerController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('passenger/index.html.twig', [
-            'controller_name' => 'PassengerController',
-        ]);
+        return $this->render('passenger/index.html.twig');
     }
 
     /**
-     * @Route("/booking", name="app_booking")
+     * @Route("/booking/{id}", name="app_booking")
      */
     public function booking(): Response
     {
-        return $this->render('passenger/booking.html.twig', [
-            'controller_name' => 'DriverController',
-        ]);
+        return $this->render('passenger/booking.html.twig');
     }
 }
