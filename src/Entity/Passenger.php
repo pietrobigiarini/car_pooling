@@ -20,7 +20,7 @@ class Passenger
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string",  length=10)
      */
     private $documententCode;
 
@@ -56,12 +56,12 @@ class Passenger
         return $this->id;
     }
 
-    public function getDocumententCode(): ?int
+    public function getDocumententCode(): ?string
     {
         return $this->documententCode;
     }
 
-    public function setDocumententCode(int $documententCode): self
+    public function setDocumententCode(string $documententCode): self
     {
         $this->documententCode = $documententCode;
 

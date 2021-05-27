@@ -31,7 +31,7 @@ class Driver
     private $birthDay;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=10)
      */
     private $licenceNumber;
 
@@ -91,12 +91,12 @@ class Driver
         return $this;
     }
 
-    public function getLicenceNumber(): ?int
+    public function getLicenceNumber(): ?string
     {
         return $this->licenceNumber;
     }
 
-    public function setLicenceNumber(int $licenceNumber): self
+    public function setLicenceNumber(string $licenceNumber): self
     {
         $this->licenceNumber = $licenceNumber;
 

@@ -4,7 +4,63 @@
 	Car sharing - Home
 {% endblock %}
 
+{% block css %}
+	{{ parent() }}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+{% endblock %}
+
 {% block body %}
-	{{ form_start(createTrip) }}
-	{{ form_end(createTrip) }}
+	<div class="container row row-cols-1 justify-content-center m-auto">
+		<div class="card p-4 shadow col custom-bg" style="width: 40%">
+			<div class="row row-cols-1">
+				<div class="col mb-3 text-center">
+					{{ form_start(createTrip) }}
+					<div class="col mb-3">
+						{{ form_label(createTrip.departureCity, 'departureCity') }}
+						{{ form_widget(createTrip.departureCity, {'attr': {'class': 'form-control'}}) }}
+					</div>
+					<div class="col mb-3">
+						{{ form_label(createTrip.destinationCity, 'destinationCity') }}
+						{{ form_widget(createTrip.destinationCity, {'attr': {'class': 'form-control'}}) }}
+					</div>
+					<div class="col mb-3">
+						{{ form_label(createTrip.departureDate, 'departureDate') }}
+						{{ form_widget(createTrip.departureDate, {'attr': {'class': 'js-datepicker'}}) }}
+					</div>
+					<div class="col mb-3">
+						{{ form_label(createTrip.contribution, 'contribution') }}
+						{{ form_widget(createTrip.contribution, {'attr': {'class': 'form-control'}}) }}
+					</div>
+					<div class="col mb-3">
+						{{ form_label(createTrip.travelTime, 'travelTime') }}
+						{{ form_widget(createTrip.travelTime, {'attr': {'class': 'form-control'}}) }}
+					</div>
+					<div class="col mb-3">
+						{{ form_widget(createTrip.baggage, {'attr': {'class': 'form-check-input'}}) }}
+						{{ form_label(createTrip.baggage, 'baggage') }}
+					</div>
+					<div class="col mb-3">
+						{{ form_widget(createTrip.animal, {'attr': {'class': 'form-check-input'}}) }}
+						{{ form_label(createTrip.animal, 'animal') }}
+					</div>
+					<div class="col mb-3">
+						{{ form_widget(createTrip.stop, {'attr': {'class': 'form-check-input'}}) }}
+						{{ form_label(createTrip.stop, 'stop') }}
+					</div>
+					<div class="col">
+						{{ form_widget(createTrip.save, {'attr': {'class': 'btn btn-primary'}}) }}
+					</div>
+					{{ form_end(createTrip) }}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block js %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script>
+        $('.js-datepicker').datepicker({ format: 'yyyy.MM.dd' });
+    </script>
 {% endblock %}

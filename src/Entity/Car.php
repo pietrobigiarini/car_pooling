@@ -31,6 +31,11 @@ class Car
     private $model;
 
     /**
+     * @ORM\Column(type="integer", length=255)
+     */
+    private $numberSpace;
+
+    /**
      * @ORM\OneToMany(targetEntity=Trip::class, mappedBy="car")
      */
     private $trips;
@@ -47,7 +52,7 @@ class Car
         $this->trips = new ArrayCollection();
     }
 
-    public function getPlate(): ?int
+    public function getPlate(): ?string
     {
         return $this->plate;
     }
@@ -75,6 +80,19 @@ class Car
 
         return $this;
     }
+
+    public function getSpace(): ?int
+    {
+        return $this->numberSpace;
+    }
+
+    public function setSpace(int $numberSpace): self
+    {
+        $this->numberSpace = $numberSpace;
+
+        return $this;
+    }
+
 
     /**
      * @return Collection|Trip[]

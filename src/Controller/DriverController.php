@@ -36,6 +36,7 @@ class DriverController extends AbstractController
             $entityManager->persist($trip);
             $entityManager->flush();
 
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('driver/create.html.twig', [
