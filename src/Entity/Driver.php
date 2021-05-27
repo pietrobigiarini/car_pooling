@@ -56,9 +56,15 @@ class Driver
      */
     private $cars;
 
+    /**
+     * @ORM\OneToMany(targetEntity=JudgmentDriver::class, mappedBy="driver")
+     */
+    private $judgmentDrivers;
+
     public function __construct()
     {
         $this->cars = new ArrayCollection();
+        $this->judgmentDrivers = new ArrayCollection();
     }
 
 
@@ -163,6 +169,36 @@ class Driver
             // set the owning side to null (unless already changed)
             if ($car->getDriver() === $this) {
                 $car->setDriver(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|JudgmentDriver[]
+     */
+    public function getJudgmentDrivers(): Collection
+    {
+        return $this->judgmentDrivers;
+    }
+
+    public function addJudgmentDriver(JudgmentDriver $judgmentDriver): self
+    {
+        if (!$this->judgmentDrivers->contains($judgmentDriver)) {
+            $this->judgmentDrivers[] = $judgmentDriver;
+            $judgmentDriver->setDriver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJudgmentDriver(JudgmentDriver $judgmentDriver): self
+    {
+        if ($this->judgmentDrivers->removeElement($judgmentDriver)) {
+            // set the owning side to null (unless already changed)
+            if ($judgmentDriver->getDriver() === $this) {
+                $judgmentDriver->setDriver(null);
             }
         }
 

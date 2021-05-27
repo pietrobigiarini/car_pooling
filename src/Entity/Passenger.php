@@ -45,9 +45,15 @@ class Passenger
      */
     private $bookings;
 
+    /**
+     * @ORM\OneToMany(targetEntity=JudgmentPassenger::class, mappedBy="passenger")
+     */
+    private $judgmentPassengers;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
+        $this->judgmentPassengers = new ArrayCollection();
     }
 
 
@@ -128,6 +134,36 @@ class Passenger
             // set the owning side to null (unless already changed)
             if ($booking->getPassenger() === $this) {
                 $booking->setPassenger(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|JudgmentPassenger[]
+     */
+    public function getJudgmentPassengers(): Collection
+    {
+        return $this->judgmentPassengers;
+    }
+
+    public function addJudgmentPassenger(JudgmentPassenger $judgmentPassenger): self
+    {
+        if (!$this->judgmentPassengers->contains($judgmentPassenger)) {
+            $this->judgmentPassengers[] = $judgmentPassenger;
+            $judgmentPassenger->setPassenger($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJudgmentPassenger(JudgmentPassenger $judgmentPassenger): self
+    {
+        if ($this->judgmentPassengers->removeElement($judgmentPassenger)) {
+            // set the owning side to null (unless already changed)
+            if ($judgmentPassenger->getPassenger() === $this) {
+                $judgmentPassenger->setPassenger(null);
             }
         }
 

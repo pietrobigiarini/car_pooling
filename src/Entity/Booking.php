@@ -28,26 +28,6 @@ class Booking
      */
     private $availability;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $passengerVote;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $driverVote;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $passengerFeedback;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $driverFeedback;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -85,54 +65,6 @@ class Booking
     public function setAvailability(bool $availability): self
     {
         $this->availability = $availability;
-
-        return $this;
-    }
-
-    public function getPassengerVote(): ?int
-    {
-        return $this->passengerVote;
-    }
-
-    public function setPassengerVote(int $passengerVote): self
-    {
-        $this->passengerVote = $passengerVote;
-
-        return $this;
-    }
-
-    public function getDriverVote(): ?int
-    {
-        return $this->driverVote;
-    }
-
-    public function setDriverVote(int $driverVote): self
-    {
-        $this->driverVote = $driverVote;
-
-        return $this;
-    }
-
-    public function getPassengerFeedback(): ?string
-    {
-        return $this->passengerFeedback;
-    }
-
-    public function setPassengerFeedback(?string $passengerFeedback): self
-    {
-        $this->passengerFeedback = $passengerFeedback;
-
-        return $this;
-    }
-
-    public function getDriverFeedback(): ?string
-    {
-        return $this->driverFeedback;
-    }
-
-    public function setDriverFeedback(?string $driverFeedback): self
-    {
-        $this->driverFeedback = $driverFeedback;
 
         return $this;
     }
