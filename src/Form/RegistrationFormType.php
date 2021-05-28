@@ -41,7 +41,6 @@ class RegistrationFormType extends AbstractType
                
             ], 'constraints' => new Length([
                     'min' => 10,
-                    'minMessage' => 'Your password should be at least {{ limit }} characters',
                     'max' => 10,
                 ]),
             ])

@@ -26,7 +26,7 @@ class Booking
     /**
      * @ORM\Column(type="boolean")
      */
-    private $availability;
+    private $outcome;
 
     public function getId(): ?int
     {
@@ -57,14 +57,14 @@ class Booking
         return $this;
     }
 
-    public function getAvailability(): ?bool
+    public function getOutcome(): ?bool
     {
-        return $this->availability;
+        return $this->outcome;
     }
 
-    public function setAvailability(bool $availability): self
+    public function setOutcome(bool $outcome): self
     {
-        $this->availability = $availability;
+        $this->outcome = $outcome;
 
         return $this;
     }

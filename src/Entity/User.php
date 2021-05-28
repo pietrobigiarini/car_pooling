@@ -36,7 +36,7 @@ class User implements UserInterface
     private $surname;
 
     /**
-     * @ORM\Column(type="string", length=180)
+     * @ORM\Column(type="integer")
      */
     private $phone;
 
@@ -102,12 +102,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPhone(): ?string
+    public function getPhone(): ?int
     {
         return $this->phone;
     }
 
-    public function setPhone(string $phone): self
+    public function setPhone(int $phone): self
     {
         $this->phone = $phone;
 
