@@ -25,12 +25,15 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbar-content">
 						<ul class="navbar-nav mb-2 mb-lg-0">
+						{% if app.user %}
 							<li class="nav-item">
 								<a class="nav-link text-light" href="{{ path('app_driver') }}">Sezione automobilista</a>
 							</li>
+							
 							<li class="nav-item">
 								<a class="nav-link text-light" href="{{ path('app_passenger') }}">Sezione passeggero</a>
 							</li>
+							{% endif %}
 						</ul>
 					</div>
 					<div class="ms-auto dropdown">
